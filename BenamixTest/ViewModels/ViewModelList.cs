@@ -62,14 +62,17 @@ namespace BenamixTest.ViewModels
             var resultGrouped = groupedBidsByPrace.Concat(groupedAsksByPrace);
 
             List<double> totalList = new List<double>();
-            ResponceList = totalList;
+            double totalVolume = 0;
             foreach (var item in resultGrouped)
             {
                 foreach (var i in item.list)
                 {
                     totalList.Add(i.DictionaryKey * i.DictionaryValue);
+                    totalVolume += i.DictionaryValue;
                 }
             }
+
+            var totalSum = totalList.ToArray().Sum();
         }
 
         private List<double> _responceList;
