@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using BenamixTest.Models;
@@ -20,19 +19,36 @@ namespace BenamixTest.ViewModels
         public override async void Initialize()
         {
             RootObject = await _restService.GetData();
-            ResponceList = Enumerable.Range(0, RootObject.asks.Length).ToDictionary(i => KeysCount(RootObject.asks), i => ValueCount(RootObject.bids));
-        }
 
-        private double ValueCount(object[,] bids)
-        {
-            double key = double.Parse(bids[0, 0].ToString()) + int.Parse(bids[1, 0].ToString());
-            return Convert.ToDouble(Math.Pow(key, 3));
-        }
+            List<double> priceMassiv1 = new List<double>();
+            List<double> priceMassiv2 = new List<double>();
 
-        private double KeysCount(object[,] asks)
-        {
-            double key = double.Parse(asks[0, 0].ToString()) + int.Parse(asks[1, 0].ToString());
-            return Convert.ToDouble(Math.Pow(key, 3));
+            var mass1 = RootObject.bids;
+            var mass2 = RootObject.asks;
+
+            int rowsMass1 = mass1.GetUpperBound(0) + 1;
+            int rowsMass2 = mass2.GetUpperBound(0) + 1;
+
+
+            for (int i = 0; i < rowsMass1; i++)
+            {
+                for (int j = 0; j < 1; j++)
+                {
+                    var roundedElementPrice = Math.Round(Convert.ToDouble(mass1[i,j]),3);
+                    priceMassiv1.Add(roundedElementPrice); 
+                }
+            }
+
+            for (int i = 0; i < rowsMass2; i++)
+            {
+                for (int j = 0; j < 1; j++)
+                {
+                    var roundedElementPrice = Math.Round(Convert.ToDouble(mass2[i, j]), 3);
+                    priceMassiv2.Add(roundedElementPrice);
+                }
+            }
+
+            var resultPriceMassiv = priceMassiv1.Concat(priceMassiv2);
         }
 
         private Dictionary<double, double> _responceList;
