@@ -4,7 +4,16 @@
                 x:Class="BenamixTest.Views.ViewList"
                 xmlns:views="clr-namespace:BenamixTest.Views;assembly=BenamixTest">
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding ResponceList}">
+        <StackLayout Orientation="Vertical" Padding="5,30,5,5">
+            
+            <Grid>
+                <Label Text="TotalSum" Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand"/>
+                <Label Text="TotalVolume" Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
+                <Label Text="{Binding TotalSum}" Grid.Row="1" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="15,0,0,0"/>
+                <Label Text="{Binding TotalVolume}" Grid.Row="1" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,0,15,0"/>
+            </Grid>
+       
+            <ListView ItemsSource="{Binding ResponceList}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -16,5 +25,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        </StackLayout>
     </ContentPage.Content>
 </views:BaseView>

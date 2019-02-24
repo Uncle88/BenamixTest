@@ -61,18 +61,19 @@ namespace BenamixTest.ViewModels
 
             var resultGrouped = groupedBidsByPrace.Concat(groupedAsksByPrace);
 
-            List<double> totalList = new List<double>();
-            double totalVolume = 0;
+            var totalList = new List<double>();
+            //double totalVolume = 0;
+
             foreach (var item in resultGrouped)
             {
                 foreach (var i in item.list)
                 {
                     totalList.Add(i.DictionaryKey * i.DictionaryValue);
-                    totalVolume += i.DictionaryValue;
+                    TotalVolume += i.DictionaryValue;
                 }
             }
 
-            var totalSum = totalList.ToArray().Sum();
+            TotalSum = totalList.ToArray().Sum();
         }
 
         private List<double> _responceList;
@@ -96,6 +97,28 @@ namespace BenamixTest.ViewModels
             set
             {
                 _rootObject = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private double _totalSum;
+        public double TotalSum
+        {
+            get { return _totalSum; }
+            set
+            {
+                _totalSum = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private double _totalVolume;
+        public double TotalVolume
+        {
+            get { return _totalVolume; }
+            set
+            {
+                _totalVolume = value;
                 OnPropertyChanged();
             }
         }
