@@ -5,5 +5,6 @@ namespace BenamixTest.Models
     {
         public double DictionaryKey { get; set; }
         public double DictionaryValue { get; set; }
+        public double Total { get; set; }
     }
 }

@@ -13,7 +13,6 @@ namespace BenamixTest.ViewModels
         public ViewModelList()
         {
             _restService = new RestService();
-            Initialize();
         }
 
         public override async void Initialize()
@@ -33,11 +32,11 @@ namespace BenamixTest.ViewModels
             {
                 for (int j = 0; j < 1; j++)
                 {
-                    var dictionaryModel = new DictionaryModel();
-                    dictionaryModel.DictionaryKey = Math.Round(Convert.ToDouble(bidsArr[i, 0]), 3);
-                    dictionaryModel.DictionaryValue = Convert.ToDouble(bidsArr[i, 1]);
-
-                    listBids.Add(dictionaryModel);
+                    var dictionaryBidsModel = new DictionaryModel();
+                    dictionaryBidsModel.DictionaryKey = Math.Round(Convert.ToDouble(bidsArr[i, 0]), 3);
+                    dictionaryBidsModel.DictionaryValue = Convert.ToDouble(bidsArr[i, 1]);
+                    dictionaryBidsModel.Total = dictionaryBidsModel.DictionaryKey * dictionaryBidsModel.DictionaryValue;
+                    listBids.Add(dictionaryBidsModel);
                 }
             }
             var groupedBidsByPrace = listBids.GroupBy(u => u.DictionaryKey)
@@ -48,11 +47,11 @@ namespace BenamixTest.ViewModels
             {
                 for (int j = 0; j < 1; j++)
                 {
-                    var dictionaryModel = new DictionaryModel();
-                    dictionaryModel.DictionaryKey = Math.Round(Convert.ToDouble(asksArr[i, 0]), 3);
-                    dictionaryModel.DictionaryValue = Convert.ToDouble(asksArr[i, 1]);
-
-                    listAsks.Add(dictionaryModel);
+                    var dictionaryAsksModel = new DictionaryModel();
+                    dictionaryAsksModel.DictionaryKey = Math.Round(Convert.ToDouble(asksArr[i, 0]), 3);
+                    dictionaryAsksModel.DictionaryValue = Convert.ToDouble(asksArr[i, 1]);
+                    dictionaryAsksModel.Total = dictionaryAsksModel.DictionaryKey * dictionaryAsksModel.DictionaryValue;
+                    listAsks.Add(dictionaryAsksModel);
                 }
             }
             var groupedAsksByPrace = listAsks.GroupBy(u => u.DictionaryKey)
@@ -60,9 +59,9 @@ namespace BenamixTest.ViewModels
                                   .ToList();
 
             var resultGrouped = groupedBidsByPrace.Concat(groupedAsksByPrace);
-
+            ResponceList = listBids.Concat(listAsks).ToList();
             var totalList = new List<double>();
-
+            
             foreach (var item in resultGrouped)
             {
                 foreach (var i in item.list)
@@ -89,16 +88,7 @@ namespace BenamixTest.ViewModels
             }
         }
 
-        private RootObject _rootObject;
-        public RootObject RootObject
-        {
-            get { return _rootObject; }
-            set
-            {
-                _rootObject = value;
-                OnPropertyChanged();
-            }
-        }
+        private RootObject RootObject { get; set; }
 
         private double _totalSum;
         public double TotalSum
@@ -121,5 +111,16 @@ namespace BenamixTest.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        //private double _total;
+        //public double Total
+        //{
+        //    get { return _total; }
+        //    set
+        //    {
+        //        _total = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
     }
 }
