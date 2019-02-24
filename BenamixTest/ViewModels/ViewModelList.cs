@@ -19,16 +19,21 @@ namespace BenamixTest.ViewModels
 
         private void SetTimer()
         {
-            var aTimer = new Timer(5000);
-            aTimer.Elapsed += delegate 
+            var _timer = new Timer(5000);
+            _timer.Elapsed += delegate 
             {
-                Initialize();
+                GetData();
             };
-            aTimer.AutoReset = true;
-            aTimer.Enabled = true;
+            _timer.AutoReset = true;
+            _timer.Enabled = true;
         }
 
-        public override async void Initialize()
+        public override void Initialize()
+        {
+            GetData();
+        }
+
+        public async void GetData()
         {
             RootObject = await _restService.GetData();
 
@@ -74,7 +79,7 @@ namespace BenamixTest.ViewModels
             var resultGrouped = groupedBidsByPrace.Concat(groupedAsksByPrace);
             ResponceList = listBids.Concat(listAsks).ToList();
             var totalList = new List<double>();
-            
+
             foreach (var item in resultGrouped)
             {
                 foreach (var i in item.list)
