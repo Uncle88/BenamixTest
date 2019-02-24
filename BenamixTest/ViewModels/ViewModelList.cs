@@ -58,10 +58,22 @@ namespace BenamixTest.ViewModels
             var groupedAsksByPrace = listAsks.GroupBy(u => u.DictionaryKey)
                                   .Select(group => new { DictionaryKey = group.Key, list = group.ToList() })
                                   .ToList();
+
+            var resultGrouped = groupedBidsByPrace.Concat(groupedAsksByPrace);
+
+            List<double> totalList = new List<double>();
+            ResponceList = totalList;
+            foreach (var item in resultGrouped)
+            {
+                foreach (var i in item.list)
+                {
+                    totalList.Add(i.DictionaryKey * i.DictionaryValue);
+                }
+            }
         }
 
-        private Dictionary<double, double> _responceList;
-        public Dictionary<double,double> ResponceList
+        private List<double> _responceList;
+        public List<double> ResponceList
         {
             get { return _responceList; }
             set
