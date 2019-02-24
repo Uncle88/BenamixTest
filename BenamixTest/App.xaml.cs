@@ -12,7 +12,7 @@ namespace BenamixTest
         {
             InitializeComponent();
 
-            MainPage = new ViewList();
+            MainPage = new NavigationPage(new ViewList());
         }
 
         protected override void OnStart()

@@ -2,9 +2,10 @@
 <views:BaseView xmlns="http://xamarin.com/schemas/2014/forms" 
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
                 x:Class="BenamixTest.Views.ViewList"
-                xmlns:views="clr-namespace:BenamixTest.Views;assembly=BenamixTest">
+                xmlns:views="clr-namespace:BenamixTest.Views;assembly=BenamixTest"
+                Title ="Binance">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" Padding="5,30,5,5">
+        <StackLayout Orientation="Vertical" Padding="5,5,5,5">
             
             <Grid>
                 <Label Text="TotalSum" Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand"/>

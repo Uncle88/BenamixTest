@@ -17,7 +17,7 @@ namespace BenamixTest.ViewModels
             SetTimer();
         }
 
-        private static void SetTimer()
+        private void SetTimer()
         {
             var aTimer = new Timer(5000);
             aTimer.Elapsed += delegate 
