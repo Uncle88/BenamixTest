@@ -20,43 +20,44 @@ namespace BenamixTest.ViewModels
         {
             RootObject = await _restService.GetData();
 
-            //List<double> priceMassiv1 = new List<double>();
-            //List<double> priceMassiv2 = new List<double>();
+            var bidsArr = RootObject.bids;
+            var asksArr = RootObject.asks;
 
-            var mass1 = RootObject.bids;
-            var mass2 = RootObject.asks;
+            int bidsArrRows = bidsArr.GetUpperBound(0) + 1;
+            int asksArrRows = asksArr.GetUpperBound(0) + 1;
 
-            int rowsMass1 = mass1.GetUpperBound(0) + 1;
-            int rowsMass2 = mass2.GetUpperBound(0) + 1;
+            var listBids = new List<DictionaryModel>();
+            var listAsks = new List<DictionaryModel>();
 
-            List<IGrouping<double, DictionaryModel>> output = new List<IGrouping<double, DictionaryModel>>();
-
-            for (int i = 0; i < rowsMass1; i++)
-            {
-                for (int j = 0; j < 2; j++)
-                {
-                    DictionaryModel dictionaryModel = new DictionaryModel();
-                    dictionaryModel.DictionaryKey = Math.Round(Convert.ToDouble(mass1[i, 0]), 3);
-                    dictionaryModel.DictionaryValue = Convert.ToDouble(mass1[i, 1]);
-
-                    List<DictionaryModel> list = new List<DictionaryModel>();
-                    list.Add(dictionaryModel);
-
-                    var groupedCustomerList = list.GroupBy(u => u.DictionaryKey)
-                                          .Select(group => new { DictionaryKey = group.Key, list = group.ToList() })
-                                          .ToList();
-                }
-            }
-
-
-            for (int i = 0; i < rowsMass2; i++)
+            for (int i = 0; i < bidsArrRows; i++)
             {
                 for (int j = 0; j < 1; j++)
                 {
-                    var roundedElementPrice = Math.Round(Convert.ToDouble(mass2[i, j]), 3);
-                    mass2[i, j] = roundedElementPrice;
+                    var dictionaryModel = new DictionaryModel();
+                    dictionaryModel.DictionaryKey = Math.Round(Convert.ToDouble(bidsArr[i, 0]), 3);
+                    dictionaryModel.DictionaryValue = Convert.ToDouble(bidsArr[i, 1]);
+
+                    listBids.Add(dictionaryModel);
                 }
             }
+            var groupedBidsByPrace = listBids.GroupBy(u => u.DictionaryKey)
+                                  .Select(group => new { DictionaryKey = group.Key, list = group.ToList() })
+                                  .ToList();
+
+            for (int i = 0; i < asksArrRows; i++)
+            {
+                for (int j = 0; j < 1; j++)
+                {
+                    var dictionaryModel = new DictionaryModel();
+                    dictionaryModel.DictionaryKey = Math.Round(Convert.ToDouble(asksArr[i, 0]), 3);
+                    dictionaryModel.DictionaryValue = Convert.ToDouble(asksArr[i, 1]);
+
+                    listAsks.Add(dictionaryModel);
+                }
+            }
+            var groupedAsksByPrace = listAsks.GroupBy(u => u.DictionaryKey)
+                                  .Select(group => new { DictionaryKey = group.Key, list = group.ToList() })
+                                  .ToList();
         }
 
         private Dictionary<double, double> _responceList;
