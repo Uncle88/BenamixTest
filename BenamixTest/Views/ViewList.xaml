@@ -13,18 +13,19 @@
                 <Label Text="{Binding TotalVolume}" Grid.Row="1" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,0,15,0"/>
             </Grid>
        
-            <ListView ItemsSource="{Binding ResponceList}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding bids}"/>
-                            <Label Text="{Binding asks}"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <ListView ItemsSource="{Binding ResponceList}" HasUnevenRows="true">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding DictionaryKey}"/>
+                                <Label Text="{Binding DictionaryValue}"/>
+                                <Label />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </views:BaseView>

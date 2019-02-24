@@ -22,6 +22,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\ListOfElements.xaml.cs" />
+    <Compile Remove="Views\ViewElements.xaml.cs" />
+    <Compile Remove="ViewModels\ViewModelElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\.DS_Store" />
