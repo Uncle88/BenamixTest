@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
 using BenamixTest.Models;
 using BenamixTest.Services.Rest;
 
@@ -13,6 +14,18 @@ namespace BenamixTest.ViewModels
         public ViewModelList()
         {
             _restService = new RestService();
+            SetTimer();
+        }
+
+        private void SetTimer()
+        {
+            var aTimer = new Timer(5000);
+            aTimer.Elapsed += delegate 
+            {
+                Initialize();
+            };
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
         }
 
         public override async void Initialize()
@@ -111,16 +124,5 @@ namespace BenamixTest.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        //private double _total;
-        //public double Total
-        //{
-        //    get { return _total; }
-        //    set
-        //    {
-        //        _total = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
     }
 }
