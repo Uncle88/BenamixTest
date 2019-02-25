@@ -29,4 +29,7 @@
     <None Remove="Views\.DS_Store" />
     <None Remove=".DS_Store" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\ViewElements.xaml" />
+  </ItemGroup>
 </Project>
