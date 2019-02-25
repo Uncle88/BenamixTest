@@ -8,6 +8,15 @@
         <StackLayout Orientation="Vertical" Padding="5,5,5,5">
             
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
                 <Label Text="TotalSum" Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand"/>
                 <Label Text="TotalVolume" Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
                 <Label Text="{Binding TotalSum}" Grid.Row="1" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="15,0,0,0"/>
@@ -16,19 +25,29 @@
             
             <StackLayout Orientation="Horizontal" Padding="0,10,0,0">
                 <Label Text="Price" HorizontalOptions="Start" Margin="15,0,0,0"/>
-                <Label Text="Volume" HorizontalOptions="CenterAndExpand"/>
-                <Label Text="Total" HorizontalOptions="End" Margin="0,0,15,0"/>
+                <Label Text="Volume" HorizontalOptions="Start" Margin="35,0,0,0"/>
+                <Label Text="Total" HorizontalOptions="CenterAndExpand" />
             </StackLayout>
             
             <ListView ItemsSource="{Binding ResponceList}" HasUnevenRows="true">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding DictionaryKey}" HorizontalOptions="Start" Margin="15,0,0,0" />
-                                <Label Text="{Binding DictionaryValue}" HorizontalOptions="CenterAndExpand"/>
-                                <Label Text="{Binding Total}" HorizontalOptions="End" Margin="0,0,15,0" />
-                            </StackLayout>
+                             <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="2*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                
+                                <Label Text="{Binding DictionaryKey}" Grid.Column="0" Margin="15,0,0,0"/>
+                                <Label Text="{Binding DictionaryValue}" Grid.Column="1" Margin="20,0,0,0" />
+                                <Label Text="{Binding Total}" Grid.Column="2" />
+                                
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
