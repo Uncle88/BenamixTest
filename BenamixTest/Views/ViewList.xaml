@@ -29,7 +29,7 @@
                 <Label Text="Total" HorizontalOptions="CenterAndExpand" />
             </StackLayout>
             
-            <ListView ItemsSource="{Binding ResponceList}" HasUnevenRows="true">
+            <ListView ItemsSource="{Binding ResponceList}" HasUnevenRows="true" CachingStrategy="RecycleElement">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
